@@ -1,0 +1,14 @@
+<html>
+
+<h1>Welcome to my page!</h1>
+<p>The environemnt variable value is: {{ env }}</p>
+<p>The properties are:</p>
+{% for prop in properties %}
+<li>{{ prop }}</li>
+{% endfor %}
+<p>The rows in the database are:</p>
+{% for row in res %}
+<li>{{ row }}</li>
+{% endfor %}
+
+</html>
