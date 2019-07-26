@@ -1,6 +1,6 @@
 ## Project Cooper
 
-Developing an application with Docker.
+Developing a simple application with Docker.
 
 Run it with:
 ```
