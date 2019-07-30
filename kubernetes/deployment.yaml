@@ -1,0 +1,32 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: pythonserver
+  labels:
+    app: pythonserver-cooper
+    env: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pythonserver
+      scope: cooper
+      env: dev
+  template:
+    metadata:
+      labels:
+        app: pythonserver
+        scope: cooper
+        env: dev
+    spec:
+      containers:
+      - name: pythonserver
+        image: "ubaldopuocci/mypythonserver"
+        imagePullPolicy: Always
+        resources: 
+          limits: 
+            memory: 500Mi
+            cpu: 500m
+        env:
+        - name: ENVKEY
+          value: test4kube

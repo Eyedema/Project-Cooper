@@ -1,0 +1,35 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: pythonserver-service
+  labels:
+    app: pythonserver-cooper
+    env: dev
+spec:
+  selector:
+    app: simple-restaurants
+    scope: demo
+  #type: NodePort
+  ports:
+    - name: http
+      protocol: "TCP"
+      port: 8082
+      #nodePort: 31113
+---
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: simple-restaurants-ingress
+  labels:
+    app: simple-restaurants
+    scope: demo
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /restaurants
+        backend:
+          serviceName: simple-restaurants-service
+          servicePort: 8082
