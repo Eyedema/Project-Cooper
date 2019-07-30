@@ -10,13 +10,13 @@ spec:
     app: pythonserver
     scope: cooper
     env: dev
-  #type: NodePort
+  type: NodePort
   ports:
     - name: http
       protocol: "TCP"
       port: 8082
       targetPort: 5000     
-      #nodePort: 31119
+      nodePort: 31119
 ---
 kind: Ingress
 apiVersion: extensions/v1beta1
