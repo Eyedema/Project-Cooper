@@ -11,8 +11,13 @@ app = Flask(__name__)
 def hello():
     env = read_envkey()
     properties = read_properties()
-    res = run_sql_statement()
-    return render_template('index.html', env=env, properties=properties, res=res)
+    res = ''
+    try:
+        res = run_sql_statement()
+        db_connected = True
+    except:
+        db_connected = False
+    return render_template('index.html', env=env, properties=properties, res=res, db_connected=db_connected)
 
 def read_properties():
     with open('config.properties') as file:
@@ -28,7 +33,7 @@ def create_db_connection():
     user=USER,
     password=PASSWORD, 
     host='mysql-cooper', 
-    port='3306')
+    port='3307') # 3306 è giusta
     return mydb
 
 def run_sql_statement():
