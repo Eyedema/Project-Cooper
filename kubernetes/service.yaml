@@ -1,0 +1,37 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: pythonserver-service
+  labels:
+    app: pythonserver-cooper
+    env: dev
+spec:
+  selector:
+    app: pythonserver
+    scope: cooper
+    env: dev
+  type: NodePort
+  ports:
+    - name: http
+      protocol: "TCP"
+      port: 8082
+      targetPort: 5000     
+      nodePort: 31119
+---
+kind: Ingress
+apiVersion: extensions/v1beta1
+metadata:
+  name: pythonserver-ingress
+  labels:
+    app: pythonserver-cooper
+    env: dev
+  annotations:
+    ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /pippo
+        backend:
+          serviceName: pythonserver-service
+          servicePort: 8082
