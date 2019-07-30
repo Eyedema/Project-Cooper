@@ -20,7 +20,7 @@ def hello():
     return render_template('index.html', env=env, properties=properties, res=res, db_connected=db_connected)
 
 def read_properties():
-    with open('config.properties') as file:
+    with open('/tmp/config.properties') as file:
         toret = [line.strip() for line in file]
     return toret
 
