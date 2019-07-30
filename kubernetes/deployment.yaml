@@ -29,7 +29,9 @@ spec:
             cpu: 500m
         volumeMounts:
           - name:  config-vol
-            mountPath:  /tmp
+            mountPath:  /temp
+          - name: config-pv
+            mountPath: /tmp
         env:
         - name: ENVKEY
           value: test4kube
@@ -37,3 +39,6 @@ spec:
        - name: config-vol
          configMap:
            name: config
+       - name: config-pv
+         persistentVolumeClaim:
+           claimName: config-pvc
