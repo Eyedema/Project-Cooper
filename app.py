@@ -6,38 +6,44 @@ import mysql.connector
 from secret import USER, PASSWORD
 
 app = Flask(__name__)
+DB_HOST = os.environ['MYSQL_HOST']
+DB_PORT = os.environ['MYSQL_PORT']
 
 @app.route('/')
 def hello():
     env = read_envkey()
     properties = read_properties()
-    res = ''
-    try:
-        res = run_sql_statement()
-        db_connected = True
-    except:
-        db_connected = False
-    return render_template('index.html', env=env, properties=properties, res=res, db_connected=db_connected)
+    res = run_sql_statement()
+    return render_template('index.html', env=env, properties=properties, res=res)
 
 def read_properties():
-    with open('/tmp/config.properties') as file:
-        toret = [line.strip() for line in file]
-    return toret
+    try:
+        with open('/tmp/config.properties') as file:
+            toret = [line.strip() for line in file]
+        return toret
+    except:
+        return False
 
 
 def read_envkey():
-    return os.environ['ENVKEY']
+    try:
+        return os.environ['ENVKEY']
+    except:
+        return False
 
 def create_db_connection():
     mydb = mysql.connector.connect(
     user=USER,
     password=PASSWORD, 
-    host='mysql-cooper', 
-    port='3307') # 3306 è giusta
+    host=DB_HOST, 
+    port=str(DB_PORT))
     return mydb
 
 def run_sql_statement():
-    mydb = create_db_connection()
+    try:
+        mydb = create_db_connection()
+    except:
+        return False
     mycursor = mydb.cursor()
     mycursor.execute("SELECT * FROM cooper.`cooper-app`")
     res = mycursor.fetchall()

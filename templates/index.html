@@ -1,15 +1,25 @@
 <html>
 
 <h1>Welcome to my page!</h1>
+{% if env %}
 <p>The environemnt variable value is: {{ env }}</p>
+{% else %}
+<p>The environemnt variable value was not set</p>
+{% endif %}
+{% if properties %}
 <p>The properties are:</p>
 {% for prop in properties %}
 <li>{{ prop }}</li>
 {% endfor %}
-{% if db_connected %}
+{% else %}
+<p>The properties were not set</p>
+{% endif %}
+{% if res %}
 <p>The rows in the database are:</p>
 {% for row in res %}
 <li>{{ row }}</li>
 {% endfor %}
+{% else %}
+<p>Database not found</p>
 {% endif %}
 </html>
