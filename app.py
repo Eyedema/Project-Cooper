@@ -3,7 +3,10 @@
 from flask import Flask, render_template
 import os
 import mysql.connector
-import configparser
+try:
+    import configparser
+except ImportError:
+    import ConfigParser as configparser
 from secret import USER, PASSWORD
 
 app = Flask(__name__)
