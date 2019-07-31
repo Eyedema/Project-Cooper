@@ -3,11 +3,14 @@
 from flask import Flask, render_template
 import os
 import mysql.connector
+import ConfigParser
 from secret import USER, PASSWORD
 
 app = Flask(__name__)
 DB_HOST = os.environ['MYSQL_HOST']
 DB_PORT = os.environ['MYSQL_PORT']
+CONFIG = ConfigParser.RawConfigParser()
+
 
 @app.route('/')
 def hello():
@@ -23,6 +26,11 @@ def read_properties():
         return toret
     except:
         return False
+    #try:
+    #    CONFIG.read('/tmp/config.properties')
+    #    return CONFIG.get('testsection', 'testsection.testprop1')
+    #except:
+    #    return False
 
 
 def read_envkey():
