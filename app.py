@@ -3,13 +3,13 @@
 from flask import Flask, render_template
 import os
 import mysql.connector
-import ConfigParser
+import configparser
 from secret import USER, PASSWORD
 
 app = Flask(__name__)
 DB_HOST = os.environ['MYSQL_HOST']
 DB_PORT = os.environ['MYSQL_PORT']
-CONFIG = ConfigParser.RawConfigParser()
+CONFIG = configparser.RawConfigParser()
 
 
 @app.route('/')

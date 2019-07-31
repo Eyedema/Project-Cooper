@@ -3,3 +3,5 @@ delete_images
 my.cnf
 .cw-settings
 .dockerignore
+dockerstop
+dockerpush
