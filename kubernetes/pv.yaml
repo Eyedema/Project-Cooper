@@ -1,0 +1,14 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: config-pv
+  labels:
+    type: local-pv
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 15Mi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/home/IBMid-120000QEMQ/config"

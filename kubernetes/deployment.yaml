@@ -27,6 +27,18 @@ spec:
           limits: 
             memory: 500Mi
             cpu: 500m
+        volumeMounts:
+          - name:  config-vol
+            mountPath:  /temp
+          - name: config-pv
+            mountPath: /tmp
         env:
         - name: ENVKEY
           value: test4kube
+      volumes:
+       - name: config-vol
+         configMap:
+           name: config
+       - name: config-pv
+         persistentVolumeClaim:
+           claimName: config-pvc
