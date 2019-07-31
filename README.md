@@ -4,7 +4,7 @@ Developing a simple application with Docker.
 
 Run it with:
 ```
-docker run -d --name <name> -p 5000:5000 -v <yourdatadir>:/tmp-e ENVKEY=<yourvalue> -e MYSQL_HOST=<yourhost> -e MYSQL_PORT=<yourport> --net <networkname> <imagename>:latest
+docker run -d --name <name> -p 5000:5000 -v <yourdatadir>:/tmp-e ENVKEY=<yourvalue> -e MYSQL_HOST=<yourhost> -e MYSQL_PORT=<yourport> --net <networkname> <imagename>
 ```
 
 Where:
