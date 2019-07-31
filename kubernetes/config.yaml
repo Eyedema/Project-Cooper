@@ -4,6 +4,8 @@ metadata:
   name: config
 data:
   config.properties: |-
+    [testsection]
+    testsection.testprop1=testvalue1
     use.db=false
     db.type=mysql
     db.url=mysql.test.com
