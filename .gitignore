@@ -2,3 +2,4 @@ secret.py
 delete_images
 my.cnf
 .cw-settings
+.dockerignore
