@@ -11,4 +11,4 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/home/IBMid-120000QEMQ/config"
+    path: "/home/skytap/storage/config"
