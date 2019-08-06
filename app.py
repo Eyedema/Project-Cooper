@@ -1,6 +1,6 @@
 
 #!/usr/bin/python
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import os
 import mysql.connector
 try:
@@ -19,8 +19,7 @@ CONFIG = configparser.RawConfigParser()
 def hello():
     env = read_envkey()
     properties = read_properties()
-    res = run_sql_statement()
-    return render_template('index.html', env=env, properties=properties, res=res)
+    return render_template('index.html', env=env, properties=properties)
 
 def read_properties():
     try:
@@ -50,15 +49,20 @@ def create_db_connection():
     port=str(DB_PORT))
     return mydb
 
+@app.route('/submit_query', methods=['POST'])
 def run_sql_statement():
     try:
         mydb = create_db_connection()
-    except:
-        return False
+    except:        
+        return render_template('submit_query.html', error=True)
+    query = request.form['query']
     mycursor = mydb.cursor()
-    mycursor.execute("SELECT * FROM cooper.`cooper-app`")
+    try:
+        mycursor.execute(str(query)) # "SELECT * FROM cooper.`cooper-app`"
+    except:
+        return render_template('submit_query.html', syntaxerror=True)
     res = mycursor.fetchall()
-    return res
+    return render_template('submit_query.html', res=res)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)
