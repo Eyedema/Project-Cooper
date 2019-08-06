@@ -3,12 +3,28 @@ apiVersion: v1
 metadata:
   name: config-pv
   labels:
-    type: local-pv
+    type: project-cooper
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 5Mi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/home/skytap/storage/config"
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: config-pv-nfs
+  labels:
+    type: project-cooper
 spec:
   storageClassName: manual
   capacity:
     storage: 15Mi
   accessModes:
     - ReadWriteOnce
-  hostPath:
-    path: "/home/IBMid-120000QEMQ/config"
+  nfs:
+    server: 10.0.0.1
+    path: "/home/skytap/storage/config"

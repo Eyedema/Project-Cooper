@@ -19,6 +19,9 @@ spec:
         scope: cooper
         env: dev
     spec:
+      #securityContext:
+        #runAsUser: 1000
+        #runAsGroup: 1000
       containers:
       - name: pythonserver
         image: "ubaldopuocci/mypythonserver"
@@ -38,7 +41,7 @@ spec:
         - name: MYSQL_HOST
           value: mysql-cooper
         - name: MYSQL_PORT
-          value: 3306
+          value: "3306"
       volumes:
        - name: config-vol
          configMap:
