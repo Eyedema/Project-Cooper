@@ -10,8 +10,12 @@ except ImportError:
 from secret import USER, PASSWORD
 
 app = Flask(__name__)
-DB_HOST = os.environ['MYSQL_HOST']
-DB_PORT = os.environ['MYSQL_PORT']
+try:
+    DB_HOST = os.environ['MYSQL_HOST']
+    DB_PORT = os.environ['MYSQL_PORT']
+except:
+    i = 1
+
 CONFIG = configparser.RawConfigParser()
 
 
